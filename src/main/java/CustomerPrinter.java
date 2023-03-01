@@ -4,5 +4,6 @@ public class CustomerPrinter {
         System.out.println("Name: " + customer.getName());
         System.out.println("Phone number: " + customer.getPhoneNumber());
         System.out.println("Address: " + customer.getAddress());
+        System.out.println("Notes: " + customer.getNotes());
     }
 }

@@ -1,54 +1,93 @@
+import java.util.HashMap;
 import java.util.Scanner;
-import java.util.Random;
-public class Main {
+import java.util.Map;
+
+public class Main{
     public static void main(String[] args) {
 
         boolean running = true;
 
+        Map<Integer, Customer> customerMap = new HashMap<Integer, Customer>();
+
+        CustomerPrinter newPrint = new CustomerPrinter();
+
+        int customerCount = 0;
+
         while(running) {
+            System.out.println("------------------------------------------------------------------------------------------------------------------------------ ");
             Scanner userIn = new Scanner(System.in);
 
-            System.out.println("Would you like to add a new customer or search for an existing customer?");
+            System.out.println("To add a new customer enter: new \nTo search for an existing customer enter: search \nTo quit the program enter: quit \nTo view employee system enter: employee");
+            String initialChoice = userIn.nextLine();
 
-            System.out.print("Enter customer name: ");
-            String customerName = userIn.nextLine();
+            if(initialChoice.contains("new")){
+                customerCount++;
 
-            System.out.print("Enter customer phone number: ");
-            String phoneNum = userIn.nextLine();
+                System.out.print("Enter customer name: ");
+                String customerName = userIn.nextLine();
 
-            System.out.print("Enter customer address: ");
-            String address = userIn.nextLine();
+                System.out.print("Enter customer phone number: ");
+                String phoneNumber = userIn.nextLine();
 
-            int max = 1000;
-            Random random = new Random();
-            int customerId = random.nextInt(max);
+                System.out.print("Enter customer address: ");
+                String address = userIn.nextLine();
 
-            Customer customer1 = new Customer(customerId, customerName, phoneNum, address);
+                System.out.print("Enter customer notes: ");
+                String notes = userIn.nextLine();
 
-            System.out.println("\n");
 
-            System.out.println("If you like to print this customers information to the screen please enter yes");
 
-            String doPrint = userIn.nextLine();
+                int customerId = customerCount;
 
-            if (doPrint.contains("yes")) {
+                Customer customer = new Customer(customerId, customerName, phoneNumber, address, notes);
 
-                CustomerPrinter printer = new CustomerPrinter();
+                customerMap.put(customerId, customer);
 
-                printer.printCustomerInfo(customer1);
+                System.out.println("A new customer has been created with these attributes: ");
 
-                System.out.println("If this information is correct please enter: yes , if not please enter: no");
+                newPrint.printCustomerInfo(customer);
 
-                String correctInfo = userIn.nextLine();
+                System.out.println("\n");
 
-                if(correctInfo.contains("yes")) {
-                    System.out.println("Okay, I will add this customer to the list");
+            } else if (initialChoice.contains("search")) {
+
+                System.out.println("Please enter the customer ID");
+                int idSearch = userIn.nextInt();
+
+                Customer customer = customerMap.get(idSearch);
+
+                if (customer != null) {
+
+                    newPrint.printCustomerInfo(customer);
+
+                    System.out.println("\n");
+                    System.out.println("Would you like to change any information about this customer?");
+                    String alterData = userIn.nextLine();
+
+                    if(alterData.contains("yes")){
+
+                    } else if (alterData.contains("no")) {
+                        System.out.println("no changes made.");
+                    } else{
+                        System.out.println("your answer must be yes or no");
+                    }
+
+                } else {
+
+                    System.out.println("Customer with ID " + idSearch + " not found.");
+
                 }
-                if(correctInfo.contains("no")) {
-                    System.out.println("I will not add this customer to the list");
-                }
-            } else {
-                System.out.println("Okay I wont print anything");
+
+            } else if(initialChoice.contains("quit")){
+
+                running = false;
+
+            } else if(initialChoice.contains("employee")){
+
+                System.out.println("Still need to finish");
+
+            } else{
+                System.out.println("that does not match any known commands please try again");
             }
         }
     }

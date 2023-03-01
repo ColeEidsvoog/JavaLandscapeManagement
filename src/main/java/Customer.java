@@ -3,12 +3,14 @@ public class Customer {
     String name;
     String phoneNumber;
     String address;
+    String notes;
 
-    public Customer(int customerId, String name, String phoneNumber, String address) {
+    public Customer(int customerId, String name, String phoneNumber, String address, String notes) {
         this.customerId = customerId;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.notes = notes;
     }
 
     public int getCustomerId() {
@@ -41,5 +43,13 @@ public class Customer {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 }
