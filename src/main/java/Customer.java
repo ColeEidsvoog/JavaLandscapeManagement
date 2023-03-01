@@ -1,10 +1,13 @@
 public class Customer {
+
+    // Customer attributes
     int customerId;
     String name;
     String phoneNumber;
     String address;
     String notes;
 
+    // Customer object constructor
     public Customer(int customerId, String name, String phoneNumber, String address, String notes) {
         this.customerId = customerId;
         this.name = name;
@@ -13,6 +16,7 @@ public class Customer {
         this.notes = notes;
     }
 
+    // Get and set methods for all customer attributes
     public int getCustomerId() {
         return customerId;
     }
